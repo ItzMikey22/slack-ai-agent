@@ -5,6 +5,21 @@ from slack_sdk.socket_mode.request import SocketModeRequest
 from slack_sdk.socket_mode.response import SocketModeResponse
 from dotenv import load_dotenv
 from agent import agent_decision
+import requests
+import time
+
+def ping_cronitor():
+    try:
+        requests.get("https://cronitor.link/p/YOUR_UNIQUE_MONITOR_ID")
+    except Exception as e:
+        print(f"Failed to ping Cronitor: {e}")
+
+
+while True:
+    # Your existing event handling code here...
+
+    ping_cronitor()  # ping Cronitor to say "I'm alive"
+    time.sleep(300)  # wait 5 minutes
 
 load_dotenv()
 
